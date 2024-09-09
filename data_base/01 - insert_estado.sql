@@ -1,0 +1,1 @@
+INSERT INTO Estado (nome) VALUES ("PERNAMBUCO");
