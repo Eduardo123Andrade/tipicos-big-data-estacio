@@ -26,8 +26,6 @@ crime_id = crime_option["id"]
 city_options = st.sidebar.selectbox("Cidades", get_cities_options(), format_func=format_city_options)
 city_id = city_options["id"]
 
-print(city_id)
-
 all_crimes_pie_chart = get_all_crimes(initial_year=initial_year, final_year=final_year)
 crime_city_chart = crimes_city(crime_id=crime_id, initial_year=initial_year, final_year=final_year)
 crime_per_city_chart = crimes_per_city(city_id=city_id, initial_year=initial_year, final_year=final_year)
