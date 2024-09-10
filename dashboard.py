@@ -19,8 +19,7 @@ crime_option = st.sidebar.selectbox("Crimes", get_crime_options(), format_func=f
 crime_id = crime_option["id"]
 
 all_crimes_pie_chart = get_all_crimes(initial_year=initial_year, final_year=final_year)
-# crime_city_chart = crimes_city(crime_id=crime_id, year=year)
-crime_city_chart = crimes_city(crime_id=crime_id)
+crime_city_chart = crimes_city(crime_id=crime_id, initial_year=initial_year, final_year=final_year)
 
 pie_chart1, pie_chart2 = st.columns(2)
 bar_chart1, bar_chart2 = st.columns(2)

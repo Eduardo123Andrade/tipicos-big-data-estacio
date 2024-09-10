@@ -1,6 +1,7 @@
 from mysql_connection import get_connection as _get_connection
+from repository.set_date_filter_on_query import set_date_on_query
 
-def _query_build(crime_id, year=None):
+def _query_build(crime_id, initial_year, final_year=None):
     query = '''
     SELECT
       m.nome,
@@ -13,17 +14,16 @@ def _query_build(crime_id, year=None):
     '''
     query += f" AND c.id = '{crime_id}'"
 
-    if year and year != 'Todos':
-        query += f" AND cm.ano = '{year}'"
+    query += set_date_on_query(initial_year=initial_year, final_year=final_year)
 
     query += " GROUP BY m.nome;"
 
     return query
 
-def get_crime_on_city(crime_id, year=None):
+def get_crime_on_city(crime_id, initial_year=None, final_year=None):
     connection = _get_connection()
     cursor = connection.cursor()
-    query = _query_build(crime_id=crime_id, year=year)
+    query = _query_build(crime_id=crime_id, initial_year=initial_year, final_year=final_year)
     cursor.execute(query)
     
     result = cursor.fetchall()
