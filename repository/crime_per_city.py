@@ -1,5 +1,5 @@
-from mysql_connection import get_connection as _get_connection
 from repository.set_date_filter_on_query import set_date_on_query
+import repository.exec_query as eq
 
 def _query_build(city_id, initial_year, final_year=None):
     query = '''
@@ -27,13 +27,7 @@ def _query_build(city_id, initial_year, final_year=None):
     return query
 
 def get_crime_per_city(city_id, initial_year=None, final_year=None):
-    connection = _get_connection()
-    cursor = connection.cursor()
     query = _query_build(city_id=city_id, initial_year=initial_year, final_year=final_year)
-    cursor.execute(query)
+    result = eq.exec_query(query=query)
     
-    result = cursor.fetchall()
-    cursor.close()
-    connection.close()
-
     return result

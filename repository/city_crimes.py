@@ -1,5 +1,5 @@
-from mysql_connection import get_connection as _get_connection
 from repository.set_date_filter_on_query import set_date_on_query
+import repository.exec_query as eq
 
 def _query_build(initial_year=None, final_year=None):
     query = '''
@@ -14,29 +14,18 @@ def _query_build(initial_year=None, final_year=None):
     '''
     query += set_date_on_query(initial_year=initial_year, final_year=final_year)
 
-    query += ' GROUP BY m.nome'
+    query += ' GROUP BY m.nome;'
 
     return query
 
 def get_all_crimes():
-  connection = _get_connection()
-  cursor = connection.cursor()
   query = _query_build()
-  cursor.execute(query)
+  result = eq.exec_query(query)
   
-  return _fetch_and_close_connection(cursor=cursor, connection=connection)
+  return result
 
 def get_crimes_by_year(initial_year, final_year=None):
-  connection = _get_connection()
-  cursor = connection.cursor()
   query = _query_build(initial_year=initial_year, final_year=final_year)
-  cursor.execute(query)
+  result = eq.exec_query(query)
 
-  return _fetch_and_close_connection(cursor=cursor, connection=connection)
-
-def _fetch_and_close_connection(cursor, connection):
-    result = cursor.fetchall()
-    cursor.close()
-    connection.close()
-
-    return result
+  return result

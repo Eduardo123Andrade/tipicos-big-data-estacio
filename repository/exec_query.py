@@ -6,6 +6,7 @@ def exec_query(query =""):
     cursor.execute(query)
 
     result = cursor.fetchall()
+    
     cursor.close()
     connection.close()
 
