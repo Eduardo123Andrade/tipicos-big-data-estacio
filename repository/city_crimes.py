@@ -1,44 +1,35 @@
 from mysql_connection import get_connection as _get_connection
 
-_query_by_year = '''
-SELECT 
-  m.nome AS municipio,
-  COALESCE(SUM(cm.quantidade), 0) AS 'quantidade crime'
-FROM
-  Municipio m
-LEFT JOIN Crime_Municipio cm ON cm.municipio_id = m.id
-WHERE
-  cm.ano = %s  -- Use positional parameter for security
-GROUP BY m.nome
-'''
+def _query_build(year=None):
+    query = '''
+    SELECT 
+      m.nome AS municipio,
+      COALESCE(SUM(cm.quantidade), 0) AS 'quantidade crime'
+    FROM
+      Municipio m
+    LEFT JOIN Crime_Municipio cm ON cm.municipio_id = m.id
+    WHERE
+      1 = 1
+    '''
+    if year and year != 'Todos':
+        query += f" AND cm.ano = '{year}'"
 
-_full_query ='''
-SELECT 
-	m.nome as municipio,
-	(
-	SELECT
-		SUM(cm.quantidade)
-	FROM
-		Crime_Municipio cm
-	WHERE
-		cm.municipio_id = m.id
-) as 'quantidade crime'
-FROM
-	Municipio m;
-'''
-
+    query += ' GROUP BY m.nome'
+    return query
 
 def get_all_crimes():
   connection = _get_connection()
   cursor = connection.cursor()
-  cursor.execute(_full_query)
+  query = _query_build()
+  cursor.execute(query)
   
   return _fetch_and_close_connection(cursor=cursor, connection=connection)
 
 def get_crimes_by_year(year):
   connection = _get_connection()
   cursor = connection.cursor()
-  cursor.execute(_query_by_year, (year, ))
+  query = _query_build(year=year)
+  cursor.execute(query)
 
   return _fetch_and_close_connection(cursor=cursor, connection=connection)
 
