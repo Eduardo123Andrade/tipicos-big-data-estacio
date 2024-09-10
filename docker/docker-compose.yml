@@ -3,7 +3,6 @@ services:
   db:
     image: mysql/mysql-server:latest
     container_name: topicos-big-data
-    restart: always
     environment:
       - MYSQL_DATABASE=mysqlDB
       - MYSQL_ROOT_PASSWORD=mysqlPW

@@ -6,6 +6,7 @@ import repository.city_crimes as rcc
 def get_all_crimes(year):
   if year ==  'Todos':
     result = rcc.get_all_crimes()
+    # print(result)
     return _format_data_frame(result)
   
   result = rcc.get_crimes_by_year(year=year)
@@ -20,4 +21,8 @@ def _format_data_frame(query_result):
     title='Crimes por municipio',
     labels='Quantidade',
   )
-  return fig_date.update_traces(text=df['Quantidade'], textposition='inside', textinfo='text+percent')
+  return fig_date.update_traces(
+    text=df['Quantidade'], 
+    textposition='inside', 
+    textinfo='text+percent'
+    )
