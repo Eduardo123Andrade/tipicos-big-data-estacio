@@ -4,6 +4,7 @@ import plotly.express as px
 from charts.all_crimes import get_all_crimes
 from dashboard_support.year_options import year_options
 from dashboard_support.crime_options import get_crime_options
+from dashboard_support.city_options import get_cities_options
 from charts.crimes_city import crimes_city
 
 
@@ -15,8 +16,16 @@ final_year = st.sidebar.selectbox("Fim", year_options)
 def format_crime_option(crime):
   return crime["description"]
 
+def format_city_options(city):
+    return city["description"]
+
 crime_option = st.sidebar.selectbox("Crimes", get_crime_options(), format_func=format_crime_option)
 crime_id = crime_option["id"]
+
+city_options = st.sidebar.selectbox("Cidades", get_cities_options(), format_func=format_city_options)
+city_id = city_options["id"]
+
+print(city_id)
 
 all_crimes_pie_chart = get_all_crimes(initial_year=initial_year, final_year=final_year)
 crime_city_chart = crimes_city(crime_id=crime_id, initial_year=initial_year, final_year=final_year)
