@@ -24,7 +24,6 @@ def _format_data_frame(query_result):
     title="Crimes na Cidade",
     labels="Descrição",
     hover_data="Descrição"
-    # orientation="h",
   )
 
   return fig_date.update_traces(text=df["Quantidade"])

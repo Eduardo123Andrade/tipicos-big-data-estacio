@@ -17,7 +17,7 @@ def _format_data_frame(query_result):
     df, 
     values='Quantidade', 
     names='Municipio', 
-    title='Crimes por municipio',
+    title='Todos os Crimes por cidade',
     labels='Quantidade',
   )
   return fig_date.update_traces(
