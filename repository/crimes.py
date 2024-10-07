@@ -1,4 +1,3 @@
-from mysql_connection import get_connection as _get_connection
 import repository.exec_query as eq
 
 
