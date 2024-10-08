@@ -3,7 +3,7 @@ import os
 import repository.exec_insert_query as eq
 
 
-def insert_city_crimes():
+def insert_city_crimes_cvli():
   path = f'{os.path.abspath(".")}/data_base/xlsx/CVLI.xlsx'
   df_cvli = pd.read_excel(path)
   column_0 = df_cvli.columns[0]
