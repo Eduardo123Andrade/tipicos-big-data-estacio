@@ -13,8 +13,8 @@ def insert_city_crimes_cvli():
   relation_data = ""
   
   cities = df_cvli[column_0].values[1: -1].tolist()
-  
-  for city in cities[0: 5]:
+
+  for city in cities:
     index = cities.index(city)
     for column in year_columns:
       year = int(df_cvli[column].values[0])
