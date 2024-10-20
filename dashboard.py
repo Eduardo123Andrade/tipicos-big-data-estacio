@@ -24,11 +24,11 @@ city_ids = multiselect_city_options(st)
 
 all_crimes_pie_chart = get_all_crimes(city_ids=city_ids, initial_year=initial_year, final_year=final_year)
 crime_city_chart = crimes_city(crime_id=crime_id, city_ids=city_ids, initial_year=initial_year, final_year=final_year)
-crime_per_city_chart = crimes_per_city(city_ids=city_ids, initial_year=initial_year, final_year=final_year)
+crime_per_city_chart = crimes_per_city(city_ids=city_ids, crime_id=crime_id, initial_year=initial_year, final_year=final_year)
 
 [pie_chart1]= st.columns(1)
 bar_chart1, bar_chart2 = st.columns(2)
 
-pie_chart1.plotly_chart(all_crimes_pie_chart)
+pie_chart1.plotly_chart(crime_per_city_chart)
 bar_chart1.plotly_chart(crime_city_chart)
-bar_chart2.plotly_chart(crime_per_city_chart)
+bar_chart2.plotly_chart(all_crimes_pie_chart)
