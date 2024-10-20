@@ -18,7 +18,7 @@ def insert_city_crimes_cvli():
     index = cities.index(city)
     for column in year_columns:
       year = int(df_cvli[column].values[0])
-      quantity = int(df_cvli[column].values[index + 1])
+      quantity = int(str(df_cvli[column].values[index + 1]).replace(".", ""))
       relation_data += f"""(
         {year}, 
         {quantity}, 
