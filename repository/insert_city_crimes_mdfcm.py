@@ -16,10 +16,9 @@ def insert_city_crimes_mdfcm():
 
   for city in cities:
     index = cities.index(city)
-    print(city)
     for column in year_columns:
       year = int(df_vdfcm[column].values[1])
-      quantity = int(df_vdfcm[column].values[index + 3])
+      quantity = int(str(df_vdfcm[column].values[index + 3]).replace(".", ""))
       relation_data += f"""(
         {year}, 
         {quantity}, 

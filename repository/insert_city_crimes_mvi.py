@@ -18,7 +18,7 @@ def insert_city_crimes_mvi():
     index = cities.index(city)
     for column in year_columns:
       year = int(df_mvi[column].values[0])
-      quantity = int(df_mvi[column].values[index + 1])
+      quantity = int(str(df_mvi[column].values[index + 1]).replace(".", ""))
       relation_data += f"""(
         {year}, 
         {quantity}, 

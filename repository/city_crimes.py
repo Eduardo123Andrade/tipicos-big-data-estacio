@@ -1,7 +1,8 @@
 from repository.set_date_filter_on_query import set_date_on_query
+from utils.add_cities_list_on_query import add_cities_id_list_on_query
 import repository.exec_query as eq
 
-def _query_build(initial_year=None, final_year=None):
+def _query_build(city_ids, initial_year=None, final_year=None):
     query = '''
     SELECT 
       m.nome AS municipio,
@@ -12,20 +13,21 @@ def _query_build(initial_year=None, final_year=None):
     WHERE
       1 = 1
     '''
+    query += add_cities_id_list_on_query(city_ids=city_ids)
     query += set_date_on_query(initial_year=initial_year, final_year=final_year)
 
     query += ' GROUP BY m.nome;'
 
     return query
 
-def get_all_crimes():
-  query = _query_build()
+def get_all_crimes(city_ids):
+  query = _query_build(city_ids=city_ids)
   result = eq.exec_query(query)
   
   return result
 
-def get_crimes_by_year(initial_year, final_year=None):
-  query = _query_build(initial_year=initial_year, final_year=final_year)
+def get_crimes_by_year(city_ids, initial_year, final_year=None):
+  query = _query_build(city_ids=city_ids, initial_year=initial_year, final_year=final_year)
   result = eq.exec_query(query)
 
   return result

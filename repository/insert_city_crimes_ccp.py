@@ -18,7 +18,7 @@ def insert_city_crimes_ccp():
     index = cities.index(city)
     for column in year_columns:
       year = int(df_ccp[column].values[2])
-      quantity = int(df_ccp[column].values[index + 3])
+      quantity = int(str(df_ccp[column].values[index + 3]).replace(".", ""))
       relation_data += f"""(
         {year}, 
         {quantity}, 
