@@ -1,7 +1,7 @@
 from repository.set_date_filter_on_query import set_date_on_query
 import repository.exec_query as eq
 
-def _query_build(city_id, initial_year, final_year=None):
+def _query_build(city_ids, initial_year, final_year=None):
     query = '''
     SELECT
       m.nome,
@@ -14,7 +14,7 @@ def _query_build(city_id, initial_year, final_year=None):
     WHERE
 	    1 = 1
     '''
-    query += f" AND m.id = '{city_id}'"
+    query += f" AND m.id IN {tuple(city_ids)}"
 
     query += set_date_on_query(initial_year=initial_year, final_year=final_year)
 
@@ -26,8 +26,8 @@ def _query_build(city_id, initial_year, final_year=None):
     '''
     return query
 
-def get_crime_per_city(city_id, initial_year=None, final_year=None):
-    query = _query_build(city_id=city_id, initial_year=initial_year, final_year=final_year)
+def get_crime_per_city(city_ids, initial_year=None, final_year=None):
+    query = _query_build(city_ids=city_ids, initial_year=initial_year, final_year=final_year)
     result = eq.exec_query(query=query)
     
     return result

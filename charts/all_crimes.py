@@ -3,12 +3,12 @@ import plotly.express as px
 import repository.city_crimes as rcc
 
 
-def get_all_crimes(initial_year, final_year=None):
+def get_all_crimes(city_ids, initial_year, final_year=None):
   if initial_year ==  'Todos':
-    result = rcc.get_all_crimes()
+    result = rcc.get_all_crimes(city_ids=city_ids)
     return _format_data_frame(result)
   
-  result = rcc.get_crimes_by_year(initial_year=initial_year, final_year=final_year)
+  result = rcc.get_crimes_by_year(city_ids=city_ids, initial_year=initial_year, final_year=final_year)
   return _format_data_frame(result)
   
 def _format_data_frame(query_result):

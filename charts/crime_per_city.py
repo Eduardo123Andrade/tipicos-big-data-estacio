@@ -3,8 +3,8 @@ import pandas as pd
 import plotly.express as px
 
 
-def crimes_per_city(city_id, initial_year=None, final_year=None):
-  result = cpc.get_crime_per_city(city_id=city_id, initial_year=initial_year, final_year=final_year)
+def crimes_per_city(city_ids, initial_year=None, final_year=None):
+  result = cpc.get_crime_per_city(city_ids=city_ids, initial_year=initial_year, final_year=final_year)
 
   return _format_data_frame(result)
 
