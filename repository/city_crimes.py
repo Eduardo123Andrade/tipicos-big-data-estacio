@@ -1,4 +1,5 @@
 from repository.set_date_filter_on_query import set_date_on_query
+from utils.add_cities_list_on_query import add_cities_id_list_on_query
 import repository.exec_query as eq
 
 def _query_build(city_ids, initial_year=None, final_year=None):
@@ -12,7 +13,7 @@ def _query_build(city_ids, initial_year=None, final_year=None):
     WHERE
       1 = 1
     '''
-    query += f'AND cm.municipio_id IN {tuple(city_ids)}'
+    query += add_cities_id_list_on_query(city_ids=city_ids)
     query += set_date_on_query(initial_year=initial_year, final_year=final_year)
 
     query += ' GROUP BY m.nome;'
