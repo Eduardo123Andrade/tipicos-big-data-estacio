@@ -5,7 +5,7 @@ CREATE TABLE `Estado`(
 
 CREATE TABLE `Municipio`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `nome` VARCHAR(255) NOT NULL,
+    `nome` VARCHAR(255) NOT NULL UNIQUE,
     `estado_id` INT UNSIGNED NOT NULL
 );
 
@@ -22,20 +22,20 @@ CREATE TABLE `Patrimonio`(
 
 CREATE TABLE `Crime_Municipio`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `mes` ENUM(
-        '1',
-        '2',
-        '3',
-        '4',
-        '5',
-        '6',
-        '7',
-        '8',
-        '9',
-        '10',
-        '11',
-        '12'
-    ) NULL,
+    -- `mes` ENUM(
+    --     '1',
+    --     '2',
+    --     '3',
+    --     '4',
+    --     '5',
+    --     '6',
+    --     '7',
+    --     '8',
+    --     '9',
+    --     '10',
+    --     '11',
+    --     '12'
+    -- ) NULL,
     `ano` INT NOT NULL,
     `quantidade` INT NOT NULL,
     `municipio_id` INT UNSIGNED NOT NULL,
